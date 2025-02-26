@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Data</title>
+</head>
+<body>
+    <h1>Delete Data</h1>
+    <form action="/delete" method="post">
+        <label for="key">KEY:</label>
+        <input type="text" id="key" name="key"><br><br>
+        <input type="submit" value="Delete">
+    </form>
+    <h2>Existing Data:</h2>
+    <ul>
+        {% for row in data %}
+        <li>{{ row[0] }}: {{ row[1] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
