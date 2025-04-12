@@ -106,8 +106,10 @@ def row_count():
 def get_quotes():
     data = retrieve_data()
     quotes_list = ''
+    quotes_list = [] # Initialize an empty list
     for row in data:
-        quotes_list.append({'quote': row, 'author': row[1], 'dateOfadd': row[2]})
+        # row[0] is quote, row[1] is author, row[2] is dateOfadd
+        quotes_list.append({'quote': row[0], 'author': row[1], 'dateOfadd': row[2]})
     return jsonify({'quotes': quotes_list})
 
 
