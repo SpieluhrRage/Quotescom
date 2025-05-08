@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: quotescom
+Version: 0.1.0
+Summary: Простое Flask-приложение для управления цитатами.
+Author-email: ZabelloPlatonov <gered372@gmail.com>
+Project-URL: Homepage, https://github.com/SpieluhrRage/Quotescom
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Framework :: Flask
+Classifier: Topic :: Database
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown

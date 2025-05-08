@@ -1,0 +1,4 @@
+graft src/quotescom/templates
+include requirements.txt
+include README.md
+include Dockerfile

@@ -1,0 +1,14 @@
+Dockerfile
+MANIFEST.in
+README.md
+pyproject.toml
+requirements.txt
+src/quotescom/__init__.py
+src/quotescom/web.py
+src/quotescom.egg-info/PKG-INFO
+src/quotescom.egg-info/SOURCES.txt
+src/quotescom.egg-info/dependency_links.txt
+src/quotescom.egg-info/top_level.txt
+templates/delete.html
+templates/login.html
+templates/register.html

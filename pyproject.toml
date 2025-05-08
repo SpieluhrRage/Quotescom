@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"] 
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quotescom" # Название твоего пакета (можешь изменить)
+version = "0.1.0"
+authors = [
+  { name="ZabelloPlatonov", email="gered372@gmail.com" }, # Замени на свои данные
+]
+description = "Простое Flask-приложение для управления цитатами." 
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Framework :: Flask",
+    "Topic :: Database",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"] 
+
+[project.scripts]
+# Если бы ты хотел сделать команду для запуска из консоли (сейчас не нужно)
+# myquotes = "tfa:app"
+
+[project.urls]
+"Homepage" = "https://github.com/SpieluhrRage/Quotescom" # Пример
