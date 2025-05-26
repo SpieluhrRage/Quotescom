@@ -14,6 +14,7 @@ import sqlite3
 import os
 from datetime import date
 
+
 # --- Константы ---
 DATABASE_PATH = 'C:\\mydatabase\\data.db' # Путь к файлу БД SQLite
 # Рекомендуется использовать относительный путь или переменную окружения для большей гибкости:

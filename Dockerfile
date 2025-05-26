@@ -1,12 +1,22 @@
+FROM python:3.11-slim-bullseye
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV FLASK_APP=quotescom.web:app 
+ENV FLASK_ENV=production       
 
-FROM python:3.12.1
-LABEL Timur Platonov 'gered370@gmail.com'
+WORKDIR /app
 
-RUN apt-get update && apt-get -y install python3-pip python3-dev build-essential
-COPY . /tfa
-WORKDIR /tfa 
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY ./src/ /app/src/
+COPY pyproject.toml .
+COPY README.md .
+COPY MANIFEST.in .
+
+
+RUN pip install --no-cache-dir .
+
 EXPOSE 8080
-EXPOSE 5000
-ENTRYPOINT ["python"]
-CMD ["tfa.py"]
+
+CMD ["waitress-serve", "--host=0.0.0.0", "--port=8080", "quotescom.web:app"]
