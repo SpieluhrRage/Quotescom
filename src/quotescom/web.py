@@ -16,7 +16,16 @@ from datetime import date
 
 
 # --- Константы ---
-DATABASE_PATH = 'C:\\mydatabase\\data.db' # Путь к файлу БД SQLite
+DATA_DIR_IN_CONTAINER = os.environ.get('APP_DATA_DIR', '/app_data') # /data - путь внутри контейнера
+DATABASE_FILENAME = 'my_database.db'
+DATABASE_PATH = os.path.join(DATA_DIR_IN_CONTAINER, DATABASE_FILENAME)
+if not os.path.exists(DATA_DIR_IN_CONTAINER):
+    try:
+        os.makedirs(DATA_DIR_IN_CONTAINER, exist_ok=True) # exist_ok=True - не будет ошибки, если уже есть
+        print(f"Создана или проверена директория для данных: {DATA_DIR_IN_CONTAINER}")
+    except OSError as e:
+        print(f"Ошибка создания директории {DATA_DIR_IN_CONTAINER}: {e}")
+        # Можно решить, что делать дальше - падать или пытаться работать без БД # Путь к файлу БД SQLite
 # Рекомендуется использовать относительный путь или переменную окружения для большей гибкости:
 # BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # DATABASE_PATH = os.path.join(BASE_DIR, 'data.db')
