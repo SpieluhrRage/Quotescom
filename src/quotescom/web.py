@@ -25,10 +25,7 @@ if not os.path.exists(DATA_DIR_IN_CONTAINER):
         print(f"Создана или проверена директория для данных: {DATA_DIR_IN_CONTAINER}")
     except OSError as e:
         print(f"Ошибка создания директории {DATA_DIR_IN_CONTAINER}: {e}")
-        # Можно решить, что делать дальше - падать или пытаться работать без БД # Путь к файлу БД SQLite
-# Рекомендуется использовать относительный путь или переменную окружения для большей гибкости:
-# BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-# DATABASE_PATH = os.path.join(BASE_DIR, 'data.db')
+
 
 # --- Инициализация Flask ---
 app = Flask(__name__)
