@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SECRET_KEY: "dev_secret_key"
+      APP_DATA_DIR: "/app_data" # Путь к данным ВНУТРИ контейнера
+      FLASK_ENV: "development"
+      FLASK_DEBUG: "1" # Включить дебаггер Flask
+    volumes:
+      # Монтируем весь код из папки src в /app/src контейнера
+      - ./src:/app/src
+      # Монтируем нашу локальную папку data_dev в /app_data контейнера
+      - ./data_dev:/app_data
+    # Если ты установил пакет, команда может быть проще, например, вызов entrypoint
+    # Если нет, то так:
+    command: python /app/src/quotescom/web.py
