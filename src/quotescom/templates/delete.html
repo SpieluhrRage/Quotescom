@@ -1,236 +1,237 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Управление цитатами</title>
-    <style> /* Добавим немного стиля для таблицы */
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        button {
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style1.css') }}">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;600;700&family=Merriweather:ital@1&display=swap"
+      rel="stylesheet"
+    >
 </head>
 <body>
-    <nav>
+    <!-- Навигация -->
+    <nav class="navbar">
         {% if current_user.is_authenticated %}
-            <span>Привет, {{ current_user.username }}!</span>
-            <a href="{{ url_for('logout') }}">Выйти</a>
+            <span class="nav-greeting">Привет, {{ current_user.username }}!</span>
+            <a href="{{ url_for('logout') }}" class="nav-link">Выйти</a>
         {% else %}
-            <a href="{{ url_for('login') }}">Войти</a> |
-            <a href="{{ url_for('register') }}">Регистрация</a>
+            <a href="{{ url_for('login') }}" class="nav-link">Войти</a>
+            |
+            <a href="{{ url_for('register') }}" class="nav-link">Регистрация</a>
         {% endif %}
     </nav>
-    <hr>
-    {# Для отображения flash-сообщений #}
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for category, message in messages %}
-          <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <h1>Добавить новую цитату</h1>
-    <form id="addQuoteForm">
-        <label for="quote">Цитата:</label><br>
-        <textarea id="quote" name="quote" rows="3" cols="50"></textarea><br>
-        <label for="author">Автор:</label><br>
-        <input type="text" id="author" name="author" size="50"><br><br>
-        <button type="button" onclick="addQuote()">Добавить цитату</button>
-    </form>
 
-    <!-- Форма удаления УДАЛЕНА -->
+    <!-- Основной контейнер по центру -->
+    <div class="container">
 
-    <h2>Текущие цитаты</h2>
-    <div id="quotesContainer">
-        {% if data %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Цитата</th>
-                    <th>Автор</th>
-                    <th>Дата добавления</th>
-                    <th>Кем добавлено</th>
-                    <th>Действие</th>
-                </tr>
-            </thead>
-            <tbody>
-         
-                {% for row in data %} {# data теперь приходит из retrieve_data_with_users #}
-                <tr>
-                    <td>{{ row['quote'] }}</td>
-                    <td>{{ row['author'] }}</td>
-                    <td>{{ row['dateOfadd'] }}</td>
-                    <td>{{ row['added_by'] }}</td> {# Имя пользователя или 'Аноним' #}
-                    <td>
-                       
-                        <button type="button" onclick="deleteQuoteById({{ row['id'] }})">Удалить</button>
-                    </td>
-                </tr>
-                {% endfor %}
-    
-            </tbody>
-            </tbody>
-        </table>
-        {% else %}
-        <p>Нет доступных цитат.</p>
+      <!-- Блок отображения flash-сообщений (использует классы success/danger/info из вашего CSS) -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
         {% endif %}
-    </div>
+      {% endwith %}
+
+      <!-- Секция "Добавить новую цитату" -->
+      <section class="quote-form">
+        <h1>Добавить новую цитату</h1>
+        <form id="addQuoteForm">
+          <label for="quote">Цитата:</label>
+          <textarea id="quote" name="quote" rows="3"></textarea>
+
+          <label for="author">Автор:</label>
+          <input type="text" id="author" name="author">
+
+          <button type="button" class="btn-primary" onclick="addQuote()">Добавить цитату</button>
+        </form>
+      </section>
+
+      <!-- Секция "Текущие цитаты" -->
+      <section class="current-quotes">
+        <h1>Текущие цитаты</h1>
+        <div id="quotesContainer" class="table-wrapper">
+          {% if data %}
+            <table class="quotes-table">
+              <thead>
+                <tr>
+                  <th>Цитата</th>
+                  <th>Автор</th>
+                  <th>Дата добавления</th>
+                  <th>Кем добавлено</th>
+                  <th>Действие</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in data %}
+                  <tr>
+                    <td class="quote-text">{{ row['quote'] }}</td>
+                    <td class="author">{{ row['author'] }}</td>
+                    <td class="date">{{ row['dateOfadd'] }}</td>
+                    <td class="added-by">{{ row['added_by'] }}</td>
+                    <td class="actions">
+                      <button type="button" class="btn-delete"
+                              onclick="deleteQuoteById({{ row['id'] }})">
+                        Удалить
+                      </button>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>Нет доступных цитат.</p>
+          {% endif %}
+        </div>
+      </section>
+
+    </div> <!-- /.container -->
 
     <script>
-        // Функция addQuote остается без изменений
+      // Функция добавления цитаты
+      async function addQuote() {
+        const form = document.getElementById('addQuoteForm');
+        const formData = new FormData(form);
+        const quote = formData.get('quote');
+        const author = formData.get('author');
 
-        async function addQuote() {
-            const form = document.getElementById('addQuoteForm');
-            const formData = new FormData(form);
-            const quote = formData.get('quote');
-            const author = formData.get('author');
-
-            if (!quote || !author) {
-                 alert('Пожалуйста, введите и цитату, и автора.');
-                 return;
-            }
-
-            try {
-                const response = await fetch('/add_quote', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log(data.message);
-                    fetchAndUpdateQuotes(); // Обновляем список после добавления
-                    form.reset(); // Очищаем форму
-                } else {
-                    const errorData = await response.json();
-                    console.error('Ошибка добавления цитаты:', errorData.error);
-                    alert('Не удалось добавить цитату: ' + errorData.error);
-                }
-            } catch (error) {
-                console.error('Сетевая ошибка при добавлении:', error);
-                alert('Произошла сетевая ошибка при добавлении цитаты.');
-            }
+        if (!quote || !author) {
+          alert('Пожалуйста, введите и цитату, и автора.');
+          return;
         }
 
-        async function deleteQuoteById(quoteId) { // Принимает ID
-            if (!confirm(`Вы уверены, что хотите удалить цитату с ID: ${quoteId}?`)) {
-                return;
-            }
-        
-            const formData = new FormData();
-            formData.append('quote_id', quoteId); // Отправляем ID с ключом 'quote_id'
-        
-            try {
-                const response = await fetch('/delete_quote', {
-                    method: 'POST',
-                    body: formData
-                });
-            
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log(data.message);
-                    fetchAndUpdateQuotes(); // Обновляем список
-                } else {
-                    const errorData = await response.json();
-                    console.error('Ошибка удаления цитаты:', errorData.error);
-                    alert('Не удалось удалить цитату: ' + errorData.error);
-                }
-            } catch (error) {
-                console.error('Сетевая ошибка при удалении:', error);
-                alert('Произошла сетевая ошибка при удалении цитаты.');
-            }
+        try {
+          const response = await fetch('/add_quote', {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data.message);
+            fetchAndUpdateQuotes();
+            form.reset();
+          } else {
+            const errorData = await response.json();
+            console.error('Ошибка добавления цитаты:', errorData.error);
+            alert('Не удалось добавить цитату: ' + errorData.error);
+          }
+        } catch (error) {
+          console.error('Сетевая ошибка при добавлении:', error);
+          alert('Произошла сетевая ошибка при добавлении цитаты.');
+        }
+      }
+
+      // Функция удаления цитаты по ID
+      async function deleteQuoteById(quoteId) {
+        if (!confirm(`Вы уверены, что хотите удалить цитату с ID: ${quoteId}?`)) {
+          return;
         }
 
-        // В функции fetchAndUpdateQuotes изменить создание кнопки:
-                // ИСПРАВЛЕННАЯ функция fetchAndUpdateQuotes
-        async function fetchAndUpdateQuotes() {
-            try {
-                const response = await fetch('/get_quotes'); // Запрашиваем свежие данные
+        const formData = new FormData();
+        formData.append('quote_id', quoteId);
 
-                if (response.ok) {
-                    const data = await response.json(); // Парсим JSON ОТВЕТА
-                    const quotesContainer = document.getElementById('quotesContainer');
-                    quotesContainer.innerHTML = ''; // Очищаем контейнер
+        try {
+          const response = await fetch('/delete_quote', {
+            method: 'POST',
+            body: formData
+          });
 
-                    if (data.quotes && data.quotes.length > 0) {
-                        const table = document.createElement('table');
-                        const thead = document.createElement('thead');
-                        const tbody = document.createElement('tbody');
-
-                        // Создаем ЗАГОЛОВОК таблицы - ДОБАВЛЕН "Кем добавлено"
-                        const headerRow = document.createElement('tr');
-                        // ПРАВИЛЬНЫЙ ПОРЯДОК ЗАГОЛОВКОВ
-                        ['Цитата', 'Автор', 'Дата добавления', 'Кем добавлено', 'Действие'].forEach(headerText => {
-                            const th = document.createElement('th');
-                            th.textContent = headerText;
-                            headerRow.appendChild(th);
-                        });
-                        thead.appendChild(headerRow);
-                        table.appendChild(thead);
-
-                        // Заполняем ТЕЛО таблицы
-                        data.quotes.forEach(item => { // item содержит id, quote, author, dateOfadd, added_by
-                            const row = document.createElement('tr');
-
-                            // Создаем ячейки в ПРАВИЛЬНОМ ПОРЯДКЕ
-                            const quoteCell = document.createElement('td');
-                            quoteCell.textContent = item.quote;
-                            row.appendChild(quoteCell);
-
-                            const authorCell = document.createElement('td');
-                            authorCell.textContent = item.author;
-                            row.appendChild(authorCell);
-
-                            const dateCell = document.createElement('td');
-                            dateCell.textContent = item.dateOfadd;
-                            row.appendChild(dateCell);
-
-                            // Ячейка "Кем добавлено"
-                            const addedByCell = document.createElement('td');
-                            addedByCell.textContent = item.added_by; // Используем данные из item
-                            row.appendChild(addedByCell);
-
-                            // Ячейка с кнопкой удаления
-                            const actionCell = document.createElement('td');
-                            const deleteButton = document.createElement('button');
-                            deleteButton.textContent = 'Удалить';
-                            deleteButton.type = 'button';
-                            // Убедимся, что передается правильный ID
-                            deleteButton.onclick = () => deleteQuoteById(item.id);
-                            actionCell.appendChild(deleteButton);
-                            row.appendChild(actionCell);
-
-                            tbody.appendChild(row);
-                        });
-                        table.appendChild(tbody);
-                        quotesContainer.appendChild(table); // Добавляем ГОТОВУЮ таблицу в контейнер
-                    } else {
-                        // Если цитат нет
-                        quotesContainer.innerHTML = '<p>Нет доступных цитат.</p>';
-                    }
-                } else {
-                    // Ошибка при получении данных с сервера
-                    console.error('Ошибка при получении цитат:', response.status, await response.text());
-                    quotesContainer.innerHTML = '<p>Не удалось загрузить цитаты. Код ошибки: ' + response.status + '</p>';
-                }
-            } catch (error) {
-                // Сетевая ошибка или ошибка парсинга JSON
-                console.error('Сетевая ошибка или ошибка обработки при получении цитат:', error);
-                // Не очищаем контейнер, чтобы не удалять возможно старые данные
-                // Можно добавить сообщение об ошибке куда-то еще
-                alert('Произошла ошибка при обновлении списка цитат.');
-            }
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data.message);
+            fetchAndUpdateQuotes();
+          } else {
+            const errorData = await response.json();
+            console.error('Ошибка удаления цитаты:', errorData.error);
+            alert('Не удалось удалить цитату: ' + errorData.error);
+          }
+        } catch (error) {
+          console.error('Сетевая ошибка при удалении:', error);
+          alert('Произошла сетевая ошибка при удалении цитаты.');
         }
-        // ... (остальной JS) ...
-        window.onload = fetchAndUpdateQuotes; // Вызываем обновленную функцию при загрузке
+      }
+
+      // Обновлённая функция fetchAndUpdateQuotes (создаёт таблицу динамически)
+      async function fetchAndUpdateQuotes() {
+        try {
+          const response = await fetch('/get_quotes');
+
+          if (response.ok) {
+            const data = await response.json();
+            const quotesContainer = document.getElementById('quotesContainer');
+            quotesContainer.innerHTML = ''; // Очищаем контейнер
+
+            if (data.quotes && data.quotes.length > 0) {
+              const table = document.createElement('table');
+              table.className = 'quotes-table';
+
+              const thead = document.createElement('thead');
+              const headerRow = document.createElement('tr');
+              ['Цитата', 'Автор', 'Дата добавления', 'Кем добавлено', 'Действие'].forEach(text => {
+                const th = document.createElement('th');
+                th.textContent = text;
+                headerRow.appendChild(th);
+              });
+              thead.appendChild(headerRow);
+              table.appendChild(thead);
+
+              const tbody = document.createElement('tbody');
+              data.quotes.forEach(item => {
+                const row = document.createElement('tr');
+
+                const quoteCell = document.createElement('td');
+                quoteCell.className = 'quote-text';
+                quoteCell.textContent = item.quote;
+                row.appendChild(quoteCell);
+
+                const authorCell = document.createElement('td');
+                authorCell.className = 'author';
+                authorCell.textContent = item.author;
+                row.appendChild(authorCell);
+
+                const dateCell = document.createElement('td');
+                dateCell.className = 'date';
+                dateCell.textContent = item.dateOfadd;
+                row.appendChild(dateCell);
+
+                const addedByCell = document.createElement('td');
+                addedByCell.className = 'added-by';
+                addedByCell.textContent = item.added_by;
+                row.appendChild(addedByCell);
+
+                const actionCell = document.createElement('td');
+                actionCell.className = 'actions';
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'btn-delete';
+                deleteButton.textContent = 'Удалить';
+                deleteButton.onclick = () => deleteQuoteById(item.id);
+                actionCell.appendChild(deleteButton);
+                row.appendChild(actionCell);
+
+                tbody.appendChild(row);
+              });
+              table.appendChild(tbody);
+
+              quotesContainer.appendChild(table);
+            } else {
+              quotesContainer.innerHTML = '<p>Нет доступных цитат.</p>';
+            }
+          } else {
+            console.error('Ошибка при получении цитат:', response.status);
+            document.getElementById('quotesContainer').innerHTML =
+              '<p>Не удалось загрузить цитаты. Код ошибки: ' + response.status + '</p>';
+          }
+        } catch (error) {
+          console.error('Сетевая ошибка или ошибка обработки при получении цитат:', error);
+          alert('Произошла ошибка при обновлении списка цитат.');
+        }
+      }
+
+      window.onload = fetchAndUpdateQuotes;
     </script>
 </body>
 </html>

@@ -1,0 +1,381 @@
+/* ================================================
+   style1.css — финальная версия для всех трёх страниц
+   ================================================ */
+
+/* ==============================
+   Переменные и сброс
+   ============================== */
+:root {
+  --color-bg-page: #ECE7DF;       /* Запасной фон страницы */
+  --color-bg-container: #FFFFFF;  /* Белый фон для контейнеров */
+  --color-text-dark: #2B2B2B;      /* Основной текст */
+  --color-text-muted: #7F7F7F;     /* Вспомогательный текст */
+  --color-accent: #D17D66;         /* Приглушённый коралл */
+  --color-accent-hover: #C66E5C;   /* Hover для коралла */
+  --color-border-light: #C9C7C2;   /* Светло-серый для границ */
+  --font-family-base: "Inter", sans-serif;
+  --font-family-headings: "Montserrat", sans-serif;
+  --font-family-quotes: "Merriweather", serif;
+}
+
+/* Сброс отступов и бордер-бокса */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* ==============================
+   Общий фон (статичный, «зафиксированный»)
+   ============================== */
+body {
+  /* Если картинка не загрузится, будет отдан запасной цвет */
+  background-color: var(--color-bg-page);
+
+  /* Фоновое изображение */
+  background-image: url("/static/img/background-image.jpg");
+  background-size: cover;         
+  background-position: center;    
+  background-repeat: no-repeat;
+
+  /* Фиксируем фон, чтобы он не «бегал» при прокрутке */
+  background-attachment: fixed;
+
+  /* Базовые текстовые стили */
+  color: var(--color-text-dark);
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ==============================
+   Навигация (шапка) — только для delete.html
+   ============================== */
+nav,
+.navbar {
+  display: block;
+  width: 100%;
+  background-color: #FFFFFF;                /* Белый фон */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10); /* Небольшая тень */
+  position: sticky;
+  top: 0;
+  z-index: 1000;                             /* Поверх фонового изображения */
+  text-align: center;
+  padding: 20px 0;
+}
+
+nav a,
+.navbar .nav-link,
+.navbar .nav-greeting {
+  font-family: var(--font-family-headings);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  margin: 0 12px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  background: transparent;
+}
+
+nav a:hover,
+.navbar .nav-link:hover {
+  color: var(--color-accent);
+}
+
+/* ==============================
+   Основной контейнер на delete.html:
+   скругляем только верхние углы
+   ============================== */
+.container {
+  max-width: 800px;
+  margin: 40px auto 80px auto;           /* Отступ сверху 40px, снизу 80px */
+  padding: 20px;
+  background-color: var(--color-bg-container);
+
+  /* Скругляем только верхние углы */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* =============================
+   Стилизация заголовков h1, h2
+   ============================= */
+h1, h2 {
+  font-family: var(--font-family-headings);
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+}
+
+/* ============================
+   Секция «Добавить новую цитату» (delete.html)
+   ============================ */
+.quote-form {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.quote-form h1 {
+  font-size: 28px;
+}
+
+.quote-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--color-text-dark);
+  text-align: left;
+}
+
+.quote-form textarea,
+.quote-form input[type="text"] {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border-light);
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  color: var(--color-text-dark);
+  padding: 8px 4px;
+  margin-bottom: 20px;
+  transition: border-color 0.2s ease;
+}
+
+.quote-form textarea:focus,
+.quote-form input[type="text"]:focus {
+  outline: none;
+  border-bottom-color: var(--color-accent);
+}
+
+.quote-form button,
+.quote-form .btn-primary {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: var(--color-bg-container);
+  font-family: var(--font-family-headings);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quote-form button:hover,
+.quote-form .btn-primary:hover {
+  background-color: var(--color-accent-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================
+   Секция «Текущие цитаты» (delete.html)
+   ========================== */
+.current-quotes {
+  width: 100%;
+}
+
+.current-quotes h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Обёртка таблицы, скругления и тень */
+.table-wrapper {
+  background-color: var(--color-bg-container);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+  overflow: hidden;
+  margin: 0 auto 60px auto;
+  width: 100%;
+}
+
+.quotes-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.quotes-table thead {
+  background-color: var(--color-border-light);
+}
+
+.quotes-table thead th {
+  font-family: var(--font-family-headings);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  padding: 12px;
+  text-align: left;
+  border-right: 1px solid var(--color-bg-container);
+}
+
+.quotes-table thead th:last-child {
+  border-right: none;
+}
+
+.quotes-table tbody tr:nth-child(even) {
+  background-color: #F9F8F6;
+}
+
+.quotes-table tbody tr:hover {
+  background-color: #F3F2EF;
+}
+
+.quotes-table td {
+  padding: 12px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-text-dark);
+  font-family: var(--font-family-base);
+  font-size: 16px;
+}
+
+.quotes-table td.author,
+.quotes-table td.date,
+.quotes-table td.added-by,
+.quotes-table td.actions {
+  text-align: left;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.quotes-table td.quote-text {
+  font-family: var(--font-family-quotes);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--color-text-dark);
+  line-height: 1.5;
+  border-left: 3px solid var(--color-text-dark);
+  padding-left: 12px;
+}
+
+.quotes-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.quotes-table .btn-delete,
+.quotes-table button {
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-family-base);
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.quotes-table .btn-delete:hover,
+.quotes-table button:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg-container);
+}
+
+/* =====================================
+   Специально для login.html и register.html
+   — контейнер небольшой, полностью скруглённый
+   — без прокрутки, центрирование контента
+   ===================================== */
+
+/* Отключаем скролл и включаем flex-центрирование */
+body.login-page,
+body.register-page {
+  overflow: hidden;        /* Нет вертикальной полосы прокрутки */
+  display: flex;
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center;     /* Центрируем по вертикали */
+  height: 100vh;           /* Высота экрана */
+}
+
+/* Маленький контейнер: скруглён со всех сторон, фиксированная ширина */
+.login-container,
+.register-container {
+  max-width: 380px;        /* Ширина контейнера */
+  width: 100%;
+  margin: 0 20px;          /* Чтобы не упирался в экран по бокам на очень узких экранах */
+  padding: 20px;
+  background-color: var(--color-bg-container);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* ===================
+   Дополнения для форм login/register
+   =================== */
+/* 1) Стилизуем input[type="submit"] с классом btn-primary */
+input[type="submit"].btn-primary {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: var(--color-bg-container);
+  font-family: var(--font-family-headings);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+input[type="submit"].btn-primary:hover {
+  background-color: var(--color-accent-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* 2) Ссылки внутри .login-container и .register-container — коралловые */
+.login-container a,
+.register-container a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.login-container a:hover,
+.register-container a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* ===================
+   Адаптивность
+   =================== */
+@media (max-width: 600px) {
+  .container {
+    padding: 0 12px;
+  }
+  .quote-form,
+  .table-wrapper {
+    padding: 16px;
+  }
+  .quotes-table thead th,
+  .quotes-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .quote-form button,
+  .quote-form .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+  nav a {
+    display: block;
+    margin: 8px 0;
+  }
+  .navbar .nav-link {
+    display: block;
+    margin: 8px 0;
+  }
+}
