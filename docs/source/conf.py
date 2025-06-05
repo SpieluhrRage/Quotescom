@@ -19,7 +19,9 @@ release = '0.1.0'
 extensions = [
     'sphinx.ext.autodoc',  # Импорт документации из docstrings
     'sphinx.ext.napoleon', # Поддержка Google/NumPy docstrings
-    'sphinx.ext.viewcode',]
+    'sphinx.ext.viewcode',
+    'sphinx.ext.autosummary',
+    'sphinx_autodoc_typehints',]
 
 templates_path = ['_templates']
 exclude_patterns = []

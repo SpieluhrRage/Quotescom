@@ -39,6 +39,242 @@
 documentation for details.</p>
 <div class="toctree-wrapper compound">
 </div>
+<p id="module-src.quotescom.web">Простое Flask-приложение для добавления, просмотра и удаления цитат
+с базовой аутентификацией пользователей.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.quotescom.web.LoginForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">LoginForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#LoginForm"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.LoginForm" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">FlaskForm</span></code></p>
+<p>Форма для входа пользователя.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.quotescom.web.LoginForm.password">
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Пароль',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#src.quotescom.web.LoginForm.password" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.quotescom.web.LoginForm.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Войти',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#src.quotescom.web.LoginForm.submit" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.quotescom.web.LoginForm.username">
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Логин',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#src.quotescom.web.LoginForm.username" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.quotescom.web.RegistrationForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">RegistrationForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#RegistrationForm"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.RegistrationForm" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">FlaskForm</span></code></p>
+<p>Форма для регистрации нового пользователя.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.quotescom.web.RegistrationForm.confirm_password">
+<span class="sig-name descname"><span class="pre">confirm_password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Повторите</span> <span class="pre">пароль',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.EqualTo</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#src.quotescom.web.RegistrationForm.confirm_password" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.quotescom.web.RegistrationForm.password">
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Пароль',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#src.quotescom.web.RegistrationForm.password" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.quotescom.web.RegistrationForm.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Зарегистрироваться',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#src.quotescom.web.RegistrationForm.submit" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.quotescom.web.RegistrationForm.username">
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Логин',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#src.quotescom.web.RegistrationForm.username" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.quotescom.web.RegistrationForm.validate_username">
+<span class="sig-name descname"><span class="pre">validate_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#RegistrationForm.validate_username"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.RegistrationForm.validate_username" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Проверяет, не занято ли имя пользователя.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.quotescom.web.User">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#User"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.User" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserMixin</span></code></p>
+<p>Класс пользователя для Flask-Login.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – Уникальный идентификатор пользователя (int).</p></li>
+<li><p><strong>username</strong> – Имя пользователя (str).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.add_quote">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">add_quote</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#add_quote"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.add_quote" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Обрабатывает добавление новой цитаты через POST-запрос (AJAX).
+Требует аутентификации пользователя.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Form quote<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Текст цитаты.</p>
+</dd>
+<dt class="field-even">Form author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Автор цитаты.</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON с сообщением об успехе или ошибке.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.check_status">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">check_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#check_status"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.check_status" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Простой маршрут для проверки, что приложение запущено.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.count_rows">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">count_rows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#count_rows"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.count_rows" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Подсчитывает общее количество цитат в таблице „data“.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Количество цитат (int) или 0 в случае ошибки.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.create_table">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">create_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#create_table"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.create_table" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Создает таблицы „users“ и „data“ в базе данных, если они еще не существуют.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.delete_data_by_id">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">delete_data_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quote_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#delete_data_by_id"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.delete_data_by_id" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Удаляет цитату из таблицы „data“ по её ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>quote_id</strong> – ID цитаты для удаления (int).</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>True, если цитата была удалена, False в противном случае.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.delete_quote">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">delete_quote</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#delete_quote"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.delete_quote" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Обрабатывает удаление цитаты через POST-запрос (AJAX).
+Требует аутентификации.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Form quote_id<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ID цитаты для удаления.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON с сообщением об успехе или ошибке.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.get_db_connection">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">get_db_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#get_db_connection"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.get_db_connection" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Устанавливает соединение с базой данных SQLite.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.get_quotes">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">get_quotes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#get_quotes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.get_quotes" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Возвращает список всех цитат в формате JSON для использования в AJAX-запросах.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.index">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#index"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.index" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Главная страница. Отображает список цитат и форму для добавления.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.load_user">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">load_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#load_user"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.load_user" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Загружает пользователя по ID. Требуется для Flask-Login.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> – ID пользователя для загрузки (str из сессии).</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Объект User или None, если пользователь не найден.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.quotescom.web.User" title="src.quotescom.web.User">User</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.login">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#login"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.login" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Отображает и обрабатывает форму входа.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.logout">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#logout"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.logout" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Выполняет выход пользователя из системы.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.register">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#register"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.register" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Отображает и обрабатывает форму регистрации.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.retrieve_data">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">retrieve_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#retrieve_data"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.retrieve_data" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Извлекает все цитаты из базы данных вместе с именем добавившего пользователя.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Список объектов sqlite3.Row, представляющих цитаты,
+или пустой список в случае ошибки.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.quotescom.web.row_count_route">
+<span class="sig-prename descclassname"><span class="pre">src.quotescom.web.</span></span><span class="sig-name descname"><span class="pre">row_count_route</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quotescom/web.html#row_count_route"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#src.quotescom.web.row_count_route" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Возвращает общее количество цитат в формате JSON.</p>
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Ссылка на этот заголовок">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Алфавитный указатель</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Состав модуля</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Поиск</span></a></p></li>
+</ul>
 </section>
 
 
