@@ -21,7 +21,7 @@ DATABASE_FILENAME = 'my_database.db'
 DATABASE_PATH = os.path.join(DATA_DIR_IN_CONTAINER, DATABASE_FILENAME)
 if not os.path.exists(DATA_DIR_IN_CONTAINER):
     try:
-        os.makedirs(DATA_DIR_IN_CONTAINER, exist_ok=True) # exist_ok=True - не будет ошибки, если уже есть
+        os.makedirs(DATA_DIR_IN_CONTAINER, exist_ok=True)
         print(f"Создана или проверена директория для данных: {DATA_DIR_IN_CONTAINER}")
     except OSError as e:
         print(f"Ошибка создания директории {DATA_DIR_IN_CONTAINER}: {e}")
@@ -29,8 +29,6 @@ if not os.path.exists(DATA_DIR_IN_CONTAINER):
 
 # --- Инициализация Flask ---
 app = Flask(__name__)
-# Секретный ключ КРАЙНЕ ВАЖЕН для сессий и защиты форм CSRF
-# Лучше генерировать его случайно и хранить безопасно (например, в переменных окружения)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'замени-меня-на-случайный-ключ-в-продакшене')
 
 # --- Настройка Flask-Login ---
@@ -58,7 +56,7 @@ class User(UserMixin):
 def get_db_connection():
     """Устанавливает соединение с базой данных SQLite."""
     conn = sqlite3.connect(DATABASE_PATH)
-    conn.row_factory = sqlite3.Row # Возвращать строки как объекты, доступные по имени колонки
+    conn.row_factory = sqlite3.Row 
     return conn
 
 def create_table():
